@@ -148,6 +148,12 @@ class ContactComponent implements ContactComponentInterface {
     if ($str) {
       $searchFields = [];
       foreach ($display_fields as $fld) {
+        // Don't search related tables - not intuitive and also when searching a
+        // :label version of a related record, the LEFT join causes CiviCRM to
+        // return all records.
+        if (preg_match('/^(address|phone|email)/', $fld)) {
+          continue;
+        }
         $searchFields[] = [$fld, 'CONTAINS', $str];
       }
       $params['where'][] = ['OR', $searchFields];
