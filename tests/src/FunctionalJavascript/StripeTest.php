@@ -38,6 +38,8 @@ final class StripeTest extends WebformCivicrmTestBase {
     ]));
     $this->setUpSettings();
 
+    $this->drupalLogout();
+    
     $this->drupalGet($this->webform->toUrl('canonical'));
     $this->assertPageNoErrorMessages();
     $edit = [
