@@ -238,6 +238,8 @@ function _fillCiviCRMData($data, $webformSubmission) {
     }
   }
 
+  // FIXME - return early to avoid error when re-saving submission.
+  return $data;
   $contacts = [];
   $query = \Drupal::database()->select('webform_civicrm_submissions', 'wcs')
     ->fields('wcs', ['contact_id', 'civicrm_data'])
